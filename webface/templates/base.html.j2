@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<h1>Komunitní web</h1>
+  <nav>
+    <ul type="None">
+    <li><a href="{{ url_for('trojuhelnik') }}">TROJUHELNÍK</a></li>
+    <li><a href="{{ url_for('ctverec') }}">ČTVEREC</a></li>
+    <li><a href="{{ url_for('obdelnik') }}">OBDÉLNÍK</a></li>
+    <li><a href="{{ url_for('logout') }}">LOGOUT</a></li>
+    </ul>
+    
+  </nav>
+
+
+
+ 
+<footer>
+</footer>
+
+
+
+
+</body>
+</html>

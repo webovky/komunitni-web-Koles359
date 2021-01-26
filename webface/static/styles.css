@@ -1,0 +1,39 @@
+body {
+    background-color: black;
+  }
+
+
+
+h1 {
+  color: darkgoldenrod;
+  text-align: center;
+  font-size: 30px;
+  border-style: solid;
+  border-width: 5px 20px;
+}
+
+form p {
+  color: white;
+  text-align: center;
+}
+
+p a {
+  color: darkturquoise;
+  text-align: justify;
+  margin-left: 80px;
+  position: relative;
+  left: 395px;
+}
+
+ul {
+  color: darkturquoise;
+  text-align: center;
+  list-style-type: none;
+  font-size: 50px;
+  padding: 90px;
+  line-height: 1.5;
+}
+
+ul li a {
+  color: darkturquoise;
+}
