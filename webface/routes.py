@@ -26,10 +26,10 @@ def login():
         session.permanent = True
         user  =request.form["nm"]
         session["user"] = user
-        return redirect(url_for("index"))
+        return redirect(url_for("uvod"))
     else:
         if "user" in session:
-            return redirect(url_for("index"))
+            return redirect(url_for("uvod"))
         return render_template("login_user.html.j2", title=title)
 
 @app.route("/user/")
@@ -47,49 +47,71 @@ def logout():
      
 @app.route("/")
 @login_required
-def index():
-    title = "Index"
-    return render_template("base.html.j2", title=title)
+def uvod():
+    title = "Úvod"
+    return render_template("uvod.html.j2", title=title)
 
 
 @app.route("/citaty/")
 @login_required
-def trojuhelnik():
+def citaty():
     title = "Citáty"
+    return render_template("citaty.html.j2", title=title)
+
+@app.route("/fakta/")
+@login_required
+def fakta():
+    title = "Fakta"
+    return render_template("fakta.html.j2", title=title)
+
+@app.route("/kalkulacka/")
+@login_required
+def kalkulacka():
+    title = "Kalkulačka"
+    cislo1 = request.args.get("cislo1")
+    cislo2 = request.args.get("cislo2")
     a = request.args.get("a")
     b = request.args.get("b")
     c = request.args.get("c")
     try:
-        o = int(a) + int(b) + int(c)
+        scitani = round(float(cislo1) + float(cislo2), 2)
+        odcitani = round(float(cislo1) - float(cislo2), 2)
+        nasobeni = round(float(cislo1) * float(cislo2), 2)
+        deleni = round(float(cislo1) / float(cislo2), 2)
+        zbytek_po_deleni = round(float(cislo1) % float(cislo2), 2)
+        
+        
     except (TypeError, ValueError):
-        o = ""
-    return render_template("trojuhelnik.html.j2", title=title, o=o)
+        scitani = ""
+        odcitani = ""
+        nasobeni = ""
+        deleni = ""
+        zbytek_po_deleni = ""
+        
 
-@app.route("/ctverec/")
-@login_required
-def ctverec():
-    title = "Čtverec"
-    a = request.args.get("a")
     try:
-        o = 4*int(a)
-        s = int(a)*int(a)
-    except (TypeError, ValueError):
-        o = ""
-        s = ""
-    return render_template("ctverec.html.j2", title=title, o=o, s=s)
+        mocnina = round(float(a)**float(b), 2)
 
-@app.route("/obdelnik/")
-@login_required
-def obdelnik():
-    title = "Obdélník"
-    a = request.args.get("a")
-    b = request.args.get("b")
-    try:
-        o = 2*(int(a)+int(b))
-        s = int(a)*int(b)
     except (TypeError, ValueError):
-        o = ""
-        s = ""
-    return render_template("obdelnik.html.j2", title=title, o=o, s=s)
+        mocnina = ""
+
+    try:
+        odmocnina_cisla = (float(c))**0.5
+
+    except (TypeError, ValueError):
+        odmocnina_cisla = ""
+
+       
+
+    return render_template("kalkulacka.html.j2",
+                            title=title,
+                            scitani=scitani,
+                            odcitani=odcitani,
+                            nasobeni=nasobeni,
+                            deleni=deleni,
+                            zbytek_po_deleni=zbytek_po_deleni,
+                            mocnina=mocnina,
+                            odmocnina_cisla=odmocnina_cisla
+                        )
 
 

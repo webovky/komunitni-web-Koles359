@@ -22,7 +22,7 @@ p a {
   text-align: justify;
   margin-left: 80px;
   position: relative;
-  left: 395px;
+  left: -40px;
 }
 
 ul {
@@ -36,4 +36,44 @@ ul {
 
 ul li a {
   color: darkturquoise;
+}
+
+p {
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  line-height: 1.5;
+  
+}
+
+form {
+  color: white;
+  text-align: center;
+  padding: 20px;
+  line-height: 1.5;
+  
+}
+
+.fakta {
+  color: white;
+  text-align: center;
+}
+
+hr {
+  border: 1px solid darkgoldenrod;
+  size: 5px;
+}
+
+.citaty {
+  font-style: italic;
+  color: white;
+  text-align: center;
+}
+
+.jmeno {
+  color: darkgoldenrod;
+  text-align: right;
+  position: relative;
+  left: -250px;
 }

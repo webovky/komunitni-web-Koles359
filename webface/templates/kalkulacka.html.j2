@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+  <h1>Kalkulačka</h1>
+
+  
+  <nav>
+  <p>
+    <a href="{{ url_for('uvod') }}">ÚVOD</a>
+    <a href="{{ url_for('citaty') }}">CITÁTY</a>
+    <a href="{{ url_for('fakta') }}">FAKTA</a>
+    <a href="{{ url_for('logout') }}">LOGOUT</a>
+  </p>
+  </nav>
+
+  <form method="get">
+    <input type="text" name="cislo1" value="{{request.args.get('cislo1') or ''}}" placeholder="první číslo" />
+    <input type="text" name="cislo2" value="{{request.args.get('cislo2') or ''}}" placeholder="druhé číslo" />
+    <input type="submit" value="výsledek" />
+  </form>
+
+  <p>
+    součet: {{scitani}}<br>rozdíl: {{odcitani}}<br>součin: {{nasobeni}}<br>podíl: {{deleni}}<br>zbytek: {{zbytek_po_deleni}}<!--<br>
+    mocnina: {{mocnina}}<br>odmocnina prvního čísla: {{odmocnina_cisla1}}<br>odmocnina druhého čísla: {{odmocnina_cisla2}}<br>
+    odmocnina součtu: {{odmocnina_souctu}}<br>odmocnina rozdílu: {{odmocnina_rozdilu}}<br>odmocnina součinu: {{odmocnina_soucinu}}<br>
+    odmocnina podílu: {{odmocnina_podilu}} -->
+  </p>
+
+  <form method="get">
+    <input type="text" name="a" value="{{request.args.get('a') or ''}}" placeholder="Zadejte číslo" />
+    <input type="text" name="b" value="{{request.args.get('b') or ''}}" placeholder="zadejte exponent" /><br>
+    <input type="text" name="c" value="{{request.args.get('c') or ''}}" placeholder="zadejte číslo pro odmocňování/umocňování" />
+    <input type="submit" value="výsledek" />
+  </form>
+  
+  <p>
+    mocnina: {{mocnina}}<br>odmocnina čísla: {{odmocnina_cisla}}
+  </p>
+
+ 
+
+<footer>
+
+</footer>
+
+
+
+
+</body>
+</html>
