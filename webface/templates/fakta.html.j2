@@ -23,7 +23,18 @@
   </p>
   </nav>
 
+<form action="" method="POST">
+  <p><input type="text" name="fakt" /></p>
+  <p><input type="submit" value="submit" /></p>
+</form>
+
 <div class="fakta">
+
+{% for fakt in fakta %}
+  <p>{{fakt.text}}
+    </p>
+    <hr>
+{% endfor %}
   <p>
     Když mluvíte, naprskáte při každém slově zhruba 2,5 mikroskopické kapičky slin.
     </p>

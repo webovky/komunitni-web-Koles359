@@ -9,16 +9,17 @@
 
 <body>
 
-<h1>Přihlášení</h1>
+<h1>Registrace</h1>
   
-<form action="{{ url_for('login') }}" method="POST">
+<form action="" method="POST">
     <p>Name:</p>
     <p><input type="text" name="nm" /></p>
     <p><input type="password" name="pswd" /></p>
+    <p><input type="password" name="pswd2" /></p>
     <p><input type="submit" value="submit" /></p>
 </form>
 
-<a href="{{ url_for('register')}}">REGISTER</a>
+<a href="{{ url_for('login')}}">LOGIN</a>
 
 <footer>
 
@@ -26,5 +27,3 @@
 
 </body>
 </html>
-
-

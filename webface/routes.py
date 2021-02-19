@@ -1,13 +1,29 @@
 from . import app
 from flask import render_template, request, Flask, session, redirect, url_for
 from datetime import timedelta
-from pony.orm import db_session
+from pony.orm import db_session, select
 from random import choice
 import functools
+from .models import Uzivatel, Fakt, Citat
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app.secret_key = "hello"
 app.permanent_session_lifetime = timedelta(minutes=5)
 
+@app.route('/register/', methods=["GET","POST"])
+@db_session
+def register():
+    if request.method == "POST":
+        name = request.form.get("nm")
+        password = request.form.get("pswd")
+        password_again = request.form.get("pswd2")
+        if name:
+            if not Uzivatel.get(login = name):
+                if password == password_again:
+                    user = Uzivatel(login = name, password = generate_password_hash(password))
+                    session["user"] = user.login
+                    return redirect(url_for("uvod"))
+    return render_template("register.html.j2") 
 
 def login_required(func):
     @functools.wraps(func)
@@ -20,13 +36,20 @@ def login_required(func):
     return wrapper
 
 @app.route("/login/", methods=["POST", "GET"])
+@db_session
 def login():
     title = "Login"
     if request.method == "POST":
         session.permanent = True
         user  =request.form["nm"]
-        session["user"] = user
-        return redirect(url_for("uvod"))
+        password = request.form["pswd"]
+        if user and password:
+            if Uzivatel.get(login = user):
+                user_db = Uzivatel.get(login = user)
+                if check_password_hash(user_db.password, password):
+                    session["user"] = user
+                    return redirect(url_for("uvod"))
+        return render_template("login_user.html.j2", title=title)            
     else:
         if "user" in session:
             return redirect(url_for("uvod"))
@@ -52,17 +75,30 @@ def uvod():
     return render_template("uvod.html.j2", title=title)
 
 
-@app.route("/citaty/")
+@app.route("/citaty/", methods=["POST", "GET"])
 @login_required
+@db_session
 def citaty():
     title = "Citáty"
-    return render_template("citaty.html.j2", title=title)
+    if request.method == "POST":
+        citat = request.form.get("citat")
+        autor = request.form.get("autor")
+        if citat and autor:
+            Citat(text = citat, autor = autor)
+            return redirect(url_for("citaty"))
+    return render_template("citaty.html.j2", title=title, citaty = list(select(e for e in Citat)))
 
-@app.route("/fakta/")
+@app.route("/fakta/", methods=["POST", "GET"])
 @login_required
+@db_session
 def fakta():
     title = "Fakta"
-    return render_template("fakta.html.j2", title=title)
+    if request.method == "POST":
+        fakt = request.form.get("fakt")
+        if fakt:
+            Fakt(text = fakt)
+            return redirect(url_for("fakta"))
+    return render_template("fakta.html.j2", title=title, fakta = list(select(e for e in Fakt)))
 
 @app.route("/kalkulacka/")
 @login_required

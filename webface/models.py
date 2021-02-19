@@ -10,9 +10,16 @@ class Uzivatel(db.Entity):
     id = PrimaryKey(int, auto=True)
     login = Required(str)
     password = Required(str)
-    email = Optional(str)
     
+    
+class Fakt(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    text = Required(str)
 
+class Citat(db.Entity):
+    id = PrimaryKey(int, auto=True)
+    text = Required(str)
+    autor = Required(str)
     
 
 
