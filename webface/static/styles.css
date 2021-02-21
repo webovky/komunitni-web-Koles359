@@ -15,6 +15,7 @@ h1 {
 form p {
   color: white;
   text-align: center;
+  padding: 5px;
 }
 
 p a {
@@ -50,8 +51,8 @@ p {
 form {
   color: white;
   text-align: center;
-  padding: 20px;
-  line-height: 1.5;
+  padding: 10px;
+  line-height: 0;
   
 }
 
@@ -85,4 +86,12 @@ footer {
 
 .paticka {
   color: black;
+}
+
+.uzivatel {
+  color: darkturquoise;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  line-height: 1.5;
 }
